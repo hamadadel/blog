@@ -8,7 +8,7 @@
 
 @if(session()->has('failure'))
 <div class="container container-narrow">
-    <div class="alert alert-success text-center">
+    <div class="alert alert-danger text-center">
         {{ session('failure') }}
     </div>
 </div>

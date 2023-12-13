@@ -29,11 +29,13 @@ class AuthController extends Controller
         ]);
         if (auth()->attempt(['name' => $data['loginname'], 'password' => $data['loginpassword']])) {
             $request->session()->regenerate();
-            return redirect()->back();
+            return redirect('/')->with('success', 'Welcome back ' . $data['loginname']);
         }
-        return 'Wrong credentials';
+        return redirect('/')->with('failure', 'Wrong credentials');
     }
-    public function test()
+    public function logout()
     {
+        auth()->logout();
+        return redirect('/')->with('success', 'You logout successfully');
     }
 }
