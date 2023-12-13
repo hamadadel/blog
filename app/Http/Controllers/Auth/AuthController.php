@@ -23,7 +23,15 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        return $request->all();
+        $data = $request->validate([
+            'loginname' => ['required', 'min:4', 'max:70'],
+            'loginpassword' => ['required', 'min:4']
+        ]);
+        if (auth()->attempt(['name' => $data['loginname'], 'password' => $data['loginpassword']])) {
+            $request->session()->regenerate();
+            return redirect()->back();
+        }
+        return 'Wrong credentials';
     }
     public function test()
     {

@@ -24,7 +24,7 @@
 
       </div>
     </header>
-
+    <x-flash />{{-- Flash messages components --}}
     {{ $slot }}
 
     <footer class="border-top text-center small text-muted py-3">

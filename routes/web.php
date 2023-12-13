@@ -15,6 +15,8 @@ use App\Http\Controllers\Auth\AuthController;
 */
 
 Route::get('/', function () {
+    if (auth()->check())
+        return view('home');
     return view('welcome');
 });
 
