@@ -25,4 +25,7 @@ class AuthController extends Controller
     {
         return $request->all();
     }
+    public function test()
+    {
+    }
 }
