@@ -20,10 +20,16 @@ class PostController extends Controller
         ]);
         $post = new Post;
         $post->title = $data['title'];
-        $post->slug = str_replace(' ', '-', str_replace(['!', '@', '#', '$', '%', '^' . '&', '*', '(', ')'], '', $data['title']));
+        $post->slug = str_replace(' ', '-', strtolower(str_replace(['!', '@', '#', '$', '%', '^', '&', '*', '(', ')'], '', $data['title'])));
         $post->content = $data['content'];
+        $post->user_id = auth()->id();
         if ($post->save())
             return redirect('/post/show/' . $post->id)->with('success', 'Post created');
         return redirect()->back()->with('failure', 'something went wrong');
+    }
+
+    public function show($id)
+    {
+        return Post::findOrFail($id);
     }
 }
