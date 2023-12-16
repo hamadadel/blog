@@ -16,11 +16,11 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'min:10', 'max:150'],
-            'content' => ['required', 'min:100']
+            'content' => ['required', 'min:10']
         ]);
         $post = new Post;
         $post->title = $data['title'];
-        $post->slug = str_replace(' ', '-', strtolower(str_replace(['!', '@', '#', '$', '%', '^', '&', '*', '(', ')'], '', $data['title'])));
+        $post->slug = $this->generateSlug($data['title']);
         $post->content = $data['content'];
         $post->user_id = auth()->id();
         if ($post->save())
@@ -31,5 +31,20 @@ class PostController extends Controller
     public function show($id)
     {
         return Post::findOrFail($id);
+    }
+
+    private function generateSlug($string)
+    {
+        return str_replace(
+            ' ',
+            '-',
+            strtolower(
+                str_replace(
+                    ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')'],
+                    '',
+                    $string
+                )
+            )
+        );
     }
 }
