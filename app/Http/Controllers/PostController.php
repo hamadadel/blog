@@ -24,13 +24,15 @@ class PostController extends Controller
         $post->content = $data['content'];
         $post->user_id = auth()->id();
         if ($post->save())
-            return redirect('/post/show/' . $post->id)->with('success', 'Post created');
+            return redirect('/post/show/' . $post->slug)->with('success', 'Post created');
         return redirect()->back()->with('failure', 'something went wrong');
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        return Post::findOrFail($id);
+
+        $post = Post::where('slug', '=', $slug)->first();
+        return $post ? view('post.show', ['post' => $post]) : [];
     }
 
     private function generateSlug($string)

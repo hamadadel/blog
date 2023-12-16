@@ -28,4 +28,4 @@ Route::post('/auth/logout', [AuthController::class, 'logout']);
 // Posts routes
 Route::get('/post/create', [PostController::class, 'create']);
 Route::post('/post/store', [PostController::class, 'store']);
-Route::get('/post/show/{id}', [PostController::class, 'show']);
+Route::get('/post/show/{slug}', [PostController::class, 'show']);
