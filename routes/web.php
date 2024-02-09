@@ -23,6 +23,9 @@ use App\Http\Controllers\UserController;
     var_dump($query->sql, $query->bindings);
     });
  */
+Route::get('/admin', function () {
+    return 'for admins only';
+})->middleware('can:admin');
 
 Route::get('/', function () {
     return view('welcome');
