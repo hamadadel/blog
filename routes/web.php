@@ -1,8 +1,11 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,17 +18,32 @@ use App\Http\Controllers\PostController;
 |
 */
 
+/**
+ * DB::listen(function ($query) {
+    var_dump($query->sql, $query->bindings);
+    });
+ */
+
 Route::get('/', function () {
-    if (auth()->check())
-        return view('home');
     return view('welcome');
-});
+})->middleware('guest')->name('welcome');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/logout', [AuthController::class, 'logout']);
 
 // Posts routes
-Route::get('/post/create', [PostController::class, 'create']);
-Route::post('/post/store', [PostController::class, 'store']);
-Route::get('/post/show/{slug}', [PostController::class, 'show']);
+Route::get('/posts/create', [PostController::class, 'create']);
+Route::get('/posts/{post:slug}', [PostController::class, 'show']);
+Route::get('/posts/{post:slug}/edit', [PostController::class, 'edit']);
+Route::post('/posts', [PostController::class, 'store']);
+Route::PATCH('/posts/{post:slug}', [PostController::class, 'update']);
+Route::delete('/posts/{post:slug}', [PostController::class, 'destroy']);
+
+
+// User Controller
+Route::get('/profile/{user:username}', [UserController::class, 'profile']);

@@ -15,7 +15,7 @@
   <body>
     <header class="header-bar mb-3">
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
-        <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
+        <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/dashboard" class="text-white">Dashboard</a></h4>
        @auth
             <x-auth-user/>  {{-- authinticated user info component --}}
            @else
@@ -28,7 +28,7 @@
     {{ $slot }}
 
     <footer class="border-top text-center small text-muted py-3">
-        <p class="m-0">Copyright &copy; 2022 <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>
+        <p class="m-0">Copyright &copy; {{ date('Y') }} <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>
       </footer>
   
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -9,9 +9,16 @@
           <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
             <form action="/auth/register" method="POST" id="registration-form">
                 @csrf
+                <div class="form-group">
+                  <label for="username-register" class="text-muted mb-1"><small>Username</small></label>
+                  <input name="username" id="username-register" class="form-control" type="text" placeholder="Pick a username" autocomplete="off" value="{{ old('username') }}" />
+                  @error('username')
+                  <p class='m-0 small alert alert-danger shadow-sm'>{{ $message }}</p>
+                  @enderror
+                </div>
               <div class="form-group">
-                <label for="username-register" class="text-muted mb-1"><small>Username</small></label>
-                <input name="name" id="username-register" class="form-control" type="text" placeholder="Pick a username" autocomplete="off" />
+                <label for="username-register" class="text-muted mb-1"><small>Name</small></label>
+                <input name="name" id="username-register" class="form-control" type="text" placeholder="Pick a name" autocomplete="off" value="{{ old('name') }}" />
                 @error('name')
                 <p class='m-0 small alert alert-danger shadow-sm'>{{ $message }}</p>
                 @enderror
@@ -19,7 +26,7 @@
   
               <div class="form-group">
                 <label for="email-register" class="text-muted mb-1"><small>Email</small></label>
-                <input name="email" id="email-register" class="form-control" type="text" placeholder="you@example.com" autocomplete="off" />
+                <input name="email" id="email-register" class="form-control" type="text" placeholder="you@example.com" autocomplete="off" value="{{ old('email') }}" />
                 @error('email')
                 <p class='m-0 small alert alert-danger shadow-sm'>{{ $message }}</p>
                 @enderror

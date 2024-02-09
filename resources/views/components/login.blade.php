@@ -2,8 +2,8 @@
     @csrf
     <div class="row align-items-center">
       <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-        <input name="loginname" class="form-control form-control-sm input-dark" type="text" placeholder="Username" autocomplete="off" />
-        @error('loginname')
+        <input value="{{old('loginemail')}}" name="loginemail" class="form-control form-control-sm input-dark" type="email" placeholder="email" />
+        @error('loginemail')
         <p class='m-0 small alert alert-danger shadow-sm'>{{ $message }}</p>
         @enderror
     </div>
