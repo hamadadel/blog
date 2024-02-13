@@ -7,6 +7,9 @@
             <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
             <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
           </form>
+          @if(auth()->id() === $user->id)
+          <a href="/avatar" class="btn btn-secondary btn-sm">update avatar</a>
+          @endif
         </h2>
   
         <div class="profile-nav nav nav-tabs pt-2 mb-4">

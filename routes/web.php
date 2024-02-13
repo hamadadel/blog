@@ -50,3 +50,5 @@ Route::delete('/posts/{post:slug}', [PostController::class, 'destroy']);
 
 // User Controller
 Route::get('/profile/{user:username}', [UserController::class, 'profile']);
+Route::get('/avatar', [UserController::class, 'avatar']);
+Route::post('/avatar', [UserController::class, 'storeAvatar']);

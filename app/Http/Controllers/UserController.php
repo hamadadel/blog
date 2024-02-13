@@ -14,4 +14,13 @@ class UserController extends Controller
         $user->load('posts');
         return view('user.profile', ['user' => $user]);
     }
+
+    public function avatar()
+    {
+        return view('user.avatar', ['user' => auth()->user()]);
+    }
+    public function storeAvatar(Request $request)
+    {
+        $request->file('avatar')->store('avatars');
+    }
 }
