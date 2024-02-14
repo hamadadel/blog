@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="{{ $user->username }}'s Followers">
     @if($user->followers->count())
         <div class="container py-md-5 container--narrow">
             <h2>Followers</h2>
@@ -20,7 +20,7 @@
       @else
         <div class="container container-narrow">
             <div class="alert alert-info text-center">
-                you don't any followers
+                You don't have any followers
             </div>
         </div>
       @endif

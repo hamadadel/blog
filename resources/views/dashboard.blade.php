@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="{{ auth()->user()->username }}'s Dashboard">
   <div class="container py-md-5 container--narrow">
     @unless($posts->isEmpty())
       <div class="list-group">
@@ -12,6 +12,9 @@
               </span>
             </a> 
           @endforeach
+      </div>
+      <div class="mt-4">
+        {{ $posts->links() }}
       </div>
    @else
     <div class="text-center">

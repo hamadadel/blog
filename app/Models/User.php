@@ -103,6 +103,6 @@ class User extends Authenticatable
     public function timeline()
     {
         $followingList = [...$this->follows()->pluck('id'), $this->id];
-        return Post::whereIn('user_id', $followingList)->latest()->get();
+        return Post::whereIn('user_id', $followingList)->latest()->paginate(5);
     }
 }

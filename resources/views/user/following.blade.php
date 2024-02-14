@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="{{ $user->username }} Follows">
     @if($user->following->count())
         <div class="container py-md-5 container--narrow">
             <h2>
