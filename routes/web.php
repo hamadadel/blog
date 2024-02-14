@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -32,7 +33,7 @@ Route::get('/', function () {
 })->middleware('guest')->name('welcome');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', ['posts' => auth()->user()->timeline()]);
 })->middleware('auth')->name('dashboard');
 
 Route::post('/auth/register', [AuthController::class, 'register']);
@@ -50,5 +51,11 @@ Route::delete('/posts/{post:slug}', [PostController::class, 'destroy']);
 
 // User Controller
 Route::get('/profile/{user:username}', [UserController::class, 'profile']);
-Route::get('/avatar', [UserController::class, 'avatar']);
-Route::post('/avatar', [UserController::class, 'storeAvatar']);
+Route::get('/avatar', [UserController::class, 'avatar'])->middleware('auth');
+Route::post('/avatar', [UserController::class, 'storeAvatar'])->middleware('auth');
+
+// Follow routes
+Route::get('/follow/{user:username}', [FollowController::class, 'follow'])->middleware('auth');
+Route::post('/follow/{user:username}', [FollowController::class, 'follow'])->middleware('auth');
+Route::get('/{user:username}/followers', [FollowController::class, 'followers']);
+Route::get('/{user:username}/following', [FollowController::class, 'following']);
