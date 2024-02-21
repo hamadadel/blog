@@ -92,14 +92,6 @@ class User extends Authenticatable
         return $this->BelongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
     }
 
-    public function feedPosts()
-    {
-        /**
-         * parameter 3 the user that doing the following
-         */
-        return $this->hasManyThrough(Post::class, Follow::class, 'follower_id', 'user_id', 'id', 'followed_id');
-    }
-
     public function timeline()
     {
         $followingList = [...$this->follows()->pluck('id'), $this->id];

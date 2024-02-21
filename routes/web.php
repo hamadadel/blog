@@ -1,12 +1,15 @@
 <?php
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\FollowController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +36,7 @@ Route::get('/', function () {
 })->middleware('guest')->name('welcome');
 
 Route::get('/dashboard', function () {
-    return view('dashboard', ['posts' => auth()->user()->timeline()]);
+    return view('dashboard', ['posts' => Auth::user()->timeline()]);
 })->middleware('auth')->name('dashboard');
 
 Route::post('/auth/register', [AuthController::class, 'register']);
@@ -59,3 +62,6 @@ Route::get('/follow/{user:username}', [FollowController::class, 'follow'])->midd
 Route::post('/follow/{user:username}', [FollowController::class, 'follow'])->middleware('auth');
 Route::get('/{user:username}/followers', [FollowController::class, 'followers']);
 Route::get('/{user:username}/following', [FollowController::class, 'following']);
+
+// Search routes
+Route::get('/search/{word}', [SearchController::class, 'search']);

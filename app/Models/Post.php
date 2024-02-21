@@ -13,6 +13,11 @@ class Post extends Model
 
     protected $fillable = ['title', 'content'];
 
+    public function toSearchableArray()
+    {
+        return ['title' => $this->title, 'content' => $this->content];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
